@@ -12,11 +12,7 @@ def profile_input_view(request):
 
 
 def grocery_list_view(request):
-    if request.method == 'POST':
-        Foodshelf.objects.create(food_name=request.POST['food_name'], expiry_date=request.POST['expiry_date'],
-                                 liter_kilogram=request.POST['liter_kilogram'], count=request.POST['count'])
-    all_food_items = Foodshelf.objects.all()
-    return render(request, 'grocerylist.html', {'all_food_items': all_food_items})
+    return render(request, 'grocerylist.html')
 
 
 def add_food_view(request):

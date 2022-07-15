@@ -610,12 +610,17 @@
         expiry_date = document.getElementsByClassName("shelfinput")[0].value;
         liter_kilogram = document.getElementsByClassName("kginput")[0].value;
         count = document.getElementsByClassName("countinput")[0].value;
+        console.log(food_name)
+        console.log(expiry_date)
+        console.log(liter_kilogram)
+        console.log(count)
         foodformat.append("food_name", food_name);
         foodformat.append("expiry_date", expiry_date);
         foodformat.append("liter_kilogram", liter_kilogram);
         foodformat.append("count", count);
         foodformat.append('csrfmiddlewaretoken', token);
-        fetch('/profileinput/foodadd.html/', {
+        console.log(foodformat)
+        fetch('/profileinput/foodadd.html', {
             method: 'POST',
             body: foodformat
         })
