@@ -9,7 +9,6 @@
             href="https://fonts.googleapis.com/css?family=Poppins&display=swap"
             rel="stylesheet"
     />
-    <link href="./css/main.css" rel="stylesheet"/>
     <style>
         * {
             box-sizing: border-box;
@@ -328,7 +327,7 @@
             text-align: left;
         }
 
-        .v174_412 {
+        .foodinput {
             width: 320px;
             height: 50px;
             background: rgba(81, 87, 108, 1);
@@ -341,7 +340,7 @@
             overflow: hidden;
         }
 
-        .v174_414 {
+        .shelfinput {
             width: 320px;
             height: 50px;
             background: rgba(81, 87, 108, 1);
@@ -354,7 +353,7 @@
             overflow: hidden;
         }
 
-        .v174_416 {
+        .kginput {
             width: 320px;
             height: 50px;
             background: rgba(81, 87, 108, 1);
@@ -367,7 +366,7 @@
             overflow: hidden;
         }
 
-        .v174_418 {
+        .countinput {
             width: 320px;
             height: 50px;
             background: rgba(81, 87, 108, 1);
@@ -572,13 +571,13 @@
     <div class="name"></div>
     <span class="v174_410">add to shelf-life list </span
     ><span class="v174_411">grocerie:</span>
-    <div class="v174_412"></div>
-    <div class="v174_414"></div>
-    <div class="v174_416"></div>
-    <div class="v174_418"></div>
+    <input class="foodinput">
+    <input class="shelfinput" value=0>
+    <input class="kginput" value=0>
+    <input class="countinput" value=0>
     <span class="v174_413">shelf-life:</span
     ><span class="v174_417">weight/l:</span
-><span class="v174_419">storage place:</span>
+><span class="v174_419">Count:</span>
     <div class="v174_420"></div>
     <span class="add_food_item" onclick="food_added_go_to_list()">+</span>
     <div class="v202_839">
@@ -598,7 +597,28 @@
 </div>
 </body>
 <script>
+    let foodformat = new FormData()
+    let token = "{{csrf_token}}";
+
+    let food_name = 0
+    let expiry_date = 0
+    let liter_kilogram = 0
+    let count = 0
+
     function food_added_go_to_list() {
+        food_name = document.getElementsByClassName("foodinput")[0].value;
+        expiry_date = document.getElementsByClassName("shelfinput")[0].value;
+        liter_kilogram = document.getElementsByClassName("kginput")[0].value;
+        count = document.getElementsByClassName("countinput")[0].value;
+        foodformat.append("food_name", food_name);
+        foodformat.append("expiry_date", expiry_date);
+        foodformat.append("liter_kilogram", liter_kilogram);
+        foodformat.append("count", count);
+        foodformat.append('csrfmiddlewaretoken', token);
+        fetch('/profileinput/foodadd.html/', {
+            method: 'POST',
+            body: foodformat
+        })
         window.location.href = 'grocerylist.html'
     }
 </script>
