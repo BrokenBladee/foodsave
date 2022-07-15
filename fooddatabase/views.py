@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Profile
+from .models import Profile, Foodshelf
 
 
 # Create your views here.
@@ -12,7 +12,8 @@ def profile_input_view(request):
 
 
 def grocery_list_view(request):
-    return render(request, 'grocerylist.html')
+    all_food_items = Foodshelf.objects.all()
+    return render(request, 'grocerylist.html', {'all_food_items': all_food_items})
 
 
 def add_food_view(request):
