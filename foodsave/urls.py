@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from fooddatabase.views import profile_input_view, test_index_view
+from fooddatabase.views import profile_input_view, grocery_list_view, add_food_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profileinput/', profile_input_view),
-    path('profileinput/index.html', test_index_view)
-
+    path('profileinput/grocerylist.html', grocery_list_view),
+    path('profileinput/foodadd.html', add_food_view),
 ]
